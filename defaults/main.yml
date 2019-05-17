@@ -1,0 +1,4 @@
+---
+# defaults file for rabbitmq-role
+rabbitmq_conf:
+  version: '3.6.12'

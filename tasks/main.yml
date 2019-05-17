@@ -1,0 +1,27 @@
+---
+# tasks file for rabbitmq-role
+- name: Load a variable file based on the OS type.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution|lower }}.yml"
+    - "{{ ansible_os_family|lower }}.yml"
+
+- name: pre-requisites tasks
+  import_tasks: redhat.yml
+  when: ansible_os_family|lower == 'redhat'
+
+- name: manage rabbitmq-server.service
+  template:
+    src: templates/rabbitmq-server.service
+    dest: /usr/lib/systemd/system/rabbitmq-server.service
+    owner: root
+    group: root
+
+- name: ensure services running
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    daemon_reload: True
+  with_items:
+    - "{{ rabbitmq.services }}"

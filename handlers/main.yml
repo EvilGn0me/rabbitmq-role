@@ -1,0 +1,7 @@
+---
+- name: restart rabbitmq
+  systemd:
+    name: "{{ item }}"
+    state: restared
+  with_items:
+    - "{{ rabbitmq.services }}"

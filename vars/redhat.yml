@@ -1,0 +1,8 @@
+rabbitmq:
+  download_url: 'https://dl.bintray.com/rabbitmq/rabbitmq-server-rpm/rabbitmq-server-{{ rabbitmq_conf.version}}-1.el7.noarch.rpm'
+  services:
+    - rabbitmq-server
+  repos:
+    rabbitmq:
+      name: 'bintray-rabbitmq-rpm'
+      baseurl: 'https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.6.x/el/7'

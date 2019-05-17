@@ -1,0 +1,12 @@
+- name: add repositories for zabbix
+  yum_repository:
+    name: "{{ item.value.name }}"
+    baseurl: "{{ item.value.baseurl }}"
+    description: Repo managed by Ansible
+    gpgcheck: no
+  with_dict: "{{ rabbitmq.repos }}"
+
+- name: install package
+  yum:
+    name: 'rabbitmq-server'
+    state: present
